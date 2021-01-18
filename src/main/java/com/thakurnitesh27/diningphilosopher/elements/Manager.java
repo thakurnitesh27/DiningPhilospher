@@ -9,6 +9,8 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import static com.thakurnitesh27.diningphilosopher.elements.Constants.CONCURRENCY_LEVEL;
+
 public class Manager {
 
     List<Philosopher> philosophers;
@@ -61,7 +63,7 @@ public class Manager {
     public void attemptEating(){
         CountDownLatch latch=new CountDownLatch(1); //just to ensure that all threads execute at once.
 
-        ExecutorService executorService=Executors.newFixedThreadPool(1);
+        ExecutorService executorService=Executors.newFixedThreadPool(CONCURRENCY_LEVEL);
         philosophers.stream().forEach(p-> executorService.submit(()->{
             try {
                 latch.await();
